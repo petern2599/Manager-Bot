@@ -26,7 +26,7 @@ void setup(void) {
   }
   Serial.println("MPU6050 Found!");
 
-  mpu.setAccelerometerRange(MPU6050_RANGE_8_G);
+  mpu.setAccelerometerRange(MPU6050_RANGE_2_G);
   Serial.print("Accelerometer range set to: ");
   switch (mpu.getAccelerometerRange()) {
   case MPU6050_RANGE_2_G:
@@ -96,19 +96,19 @@ void loop() {
 
   /* Print out the values */
   Serial.print("Acceleration X: ");
-  Serial.print(a.acceleration.x);
+  Serial.print(a.acceleration.x-0.63);
   Serial.print(", Y: ");
-  Serial.print(a.acceleration.y);
+  Serial.print(a.acceleration.y-0.22);
   Serial.print(", Z: ");
-  Serial.print(a.acceleration.z);
+  Serial.print(a.acceleration.z+0.58);
   Serial.println(" m/s^2");
 
   Serial.print("Rotation X: ");
-  Serial.print(g.gyro.x);
+  Serial.print(g.gyro.x+0.05);
   Serial.print(", Y: ");
-  Serial.print(g.gyro.y);
+  Serial.print(g.gyro.y+0.02);
   Serial.print(", Z: ");
-  Serial.print(g.gyro.z);
+  Serial.print(g.gyro.z+0.02);
   Serial.println(" rad/s");
 
   Serial.print("Temperature: ");
@@ -116,5 +116,5 @@ void loop() {
   Serial.println(" degC");
 
   Serial.println("");
-  delay(500);
+  delay(100);
 }
