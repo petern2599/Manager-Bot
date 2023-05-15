@@ -22,8 +22,10 @@ setup(
         'console_scripts': [
             "image_publisher = inventory_management.image_publisher:main",
             "image_subscriber = inventory_management.image_subscriber:main",
-            "serial_transcriber = inventory_management.serial_transcriber:main",
-            "serial_imu = inventory_management.serial_imu:main"
+            "serial_motor_controller = inventory_management.serial_motor_controller:main",
+            "serial_imu = inventory_management.serial_imu:main",
+            "serial_publisher = inventory_management.serial_publisher:main",
+            "state_estimator = inventory_management.state_estimator:main"
         ],
     },
 )
