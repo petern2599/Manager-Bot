@@ -8,6 +8,8 @@ from geometry_msgs.msg import Twist
 class SerialMotorControllerNode(Node):
     def __init__(self,name, sub_name):
         super().__init__(name)
+        self.linear_x = 0.0;
+        self.angular_z = 0.0;
         self._twist_subscriber = self.create_subscription(Twist,sub_name,self.twist_callback,10)
         # Initiate serial connection
         self._serial_conn = serial.Serial('/dev/ttyACM0',115200,timeout=1.0)
@@ -24,10 +26,12 @@ class SerialMotorControllerNode(Node):
         print("Serial Connection Closed")
 
     def twist_callback(self,msg):
-        linear_x = msg.linear.x
-        angular_z = msg.angular.z
-        self.get_logger().info("Linear_x: {} | Angular_z: {}".format(linear_x,angular_z))
-        self._serial_conn.write("{},{}\n".format(linear_x,angular_z).encode('utf-8'))
+        self.linear_x = msg.linear.x
+        self.angular_z = msg.angular.z
+        # print(self.linear_x)
+        # print(self.angular_z)
+        # self.get_logger().info("Linear_x: {} | Angular_z: {}".format(self.linear_x,self.angular_z))
+        self._serial_conn.write("{},{}\n".format(self.linear_x,self.angular_z).encode('utf-8'))
 
 def main(args=None):
     rclpy.init(args=args)
